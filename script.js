@@ -13,19 +13,28 @@ const displayListItem = (data) => {
     const li = document.createElement("li");
     li.classList.add("nav-item");
     li.innerHTML = `
-      <a class="nav-link active" aria-current="page" href="#">${singleData.category_name}</a>
+      <a onclick="displayNews('${singleData.category_id}')" class="nav-link active" aria-current="page"  href="#">${singleData.category_name}</a>
       
       `;
     listContainer.appendChild(li);
   });
 };
 
-document.getElementById('list-container').addEventListener('click', () => {
+const displayNews = (news) => {
+  const eachNewsUrl = `https://openapi.programming-hero.com/api/news/category/${news}`;
+  fetch(eachNewsUrl)
+    .then((res) => res.json())
+    .then((eachNews) => {
+      displayNewsCard(eachNews);
+    });
+};
 
-
-
-
-})
-
+const displayNewsCard = (eachNews) => {
+  const { data } = eachNews;
+    data.forEach(singleData => {
+    console.log(singleData);
+    
+    })
+};
 
 displayList();
