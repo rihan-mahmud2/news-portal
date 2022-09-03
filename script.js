@@ -19,7 +19,7 @@ const displyEachModalPlaery = (modalData) => {
     <div class="text-center">
      <h5>Title: ${modalData.title}</h5>
      <img src="${modalData.thumbnail_url}">
-     <small class="d-block">Author: ${modalData.author.name}</small>
+     <small class="d-block">Author: ${modalData.author.name ? modalData.author.name : "No data Found" }  </small>
      <span>Pblished: ${modalData.author.published_date}</span>
     
     </div>
@@ -137,7 +137,7 @@ const displayNewsCard = (eachNews) => {
           singleData.author.img
         }" alt="..." class="img-fluid rounded-circle" style="width:100px">
         <div class="d-flex flex-column">
-        <span>${singleData.author["name"]}</span>
+        <span>${singleData.author["name"] ? singleData.author["name"] :'No data found'  }</span>
         <quote>${singleData.author.published_date}</quote>
         </div>
        </div>
