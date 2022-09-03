@@ -74,7 +74,6 @@ const displayNewsCard = (eachNews) => {
   // Bubble sort Implementation using Javascript
 
   // Creating the bblSort function
-  
 
   function bblSort(arr) {
     for (let i = 0; i < arr.length; i++) {
@@ -93,7 +92,7 @@ const displayNewsCard = (eachNews) => {
 
     passSortedArr(arr);
   }
-  
+
   bblSort(data);
 
   const noData = document.getElementById("no-data");
@@ -113,8 +112,8 @@ const displayNewsCard = (eachNews) => {
     `;
   }
   function passSortedArr(data) {
-  const cardContainer = document.getElementById("card-container");
-  cardContainer.innerHTML = "";
+    const cardContainer = document.getElementById("card-container");
+    cardContainer.innerHTML = "";
     data.forEach((singleData, index) => {
       // console.log(singleData);
       const div = document.createElement("div");
@@ -131,7 +130,7 @@ const displayNewsCard = (eachNews) => {
     <div class="col-md-8">
       <div class="card-body">
         <h5 class="card-title">${singleData.title}</h5>
-        <p class="card-text">${singleData.details.slice(0, 200)}...</p>
+        <p class="card-text text-truncate">${singleData.details}</p>
         <div class="d-flex flex-row  justify-content-evenly align-items-center">
        <div clss="flex-row">
         <img src="${
