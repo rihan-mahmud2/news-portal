@@ -1,9 +1,13 @@
 const displayList = async () => {
-  const res = await fetch(
-    "https://openapi.programming-hero.com/api/news/categories"
-  );
-  const data = await res.json();
-  displayListItem(data.data.news_category);
+  try {
+    const res = await fetch(
+      "https://openapi.programming-hero.com/api/news/categories"
+    );
+    const data = await res.json();
+    displayListItem(data.data.news_category);
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 const displayListItem = (data) => {
@@ -21,11 +25,16 @@ const displayListItem = (data) => {
 };
 
 const displayNews = (news) => {
+  const spinner = document.getElementById("spinner");
+  spinner.classList.remove("d-none");
   const eachNewsUrl = `https://openapi.programming-hero.com/api/news/category/${news}`;
   fetch(eachNewsUrl)
     .then((res) => res.json())
     .then((eachNews) => {
       displayNewsCard(eachNews);
+    })
+    .catch((err) => {
+      console.log(err);
     });
 };
 
@@ -34,6 +43,7 @@ const displayNewsCard = (eachNews) => {
   const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML = "";
   data.forEach((singleData) => {
+    const singleDataStrinigified = JSON.stringify(singleData);
     console.log(singleData);
     const div = document.createElement("div");
 
@@ -58,7 +68,9 @@ const displayNewsCard = (eachNews) => {
           singleData.total_view ? singleData.total_view : "No data Found"
         }</p>
 
-        <button class="btn btn-primary">Click</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+           Click
+        </button>
         
         </div>
       </div>
@@ -70,6 +82,11 @@ const displayNewsCard = (eachNews) => {
       `;
     cardContainer.appendChild(div);
   });
+  spinner.classList.add("d-none");
 };
+
+// const displayModal = () => {
+//   console.log("clicked");
+// };
 
 displayList();
